@@ -7,9 +7,10 @@ module.exports = {
   testPathIgnorePatterns: ['/node_modules/', '/cypress/'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   collectCoverage: true,
+  coverageDirectory: 'jest/coverage',
   moduleNameMapper: {
-    '\\.(svg|jpg|png|css)$': '<rootDir>/spec/empty-module.js'
+    '\\.(svg|jpg|png|css)$': '<rootDir>/jest/empty-module.js'
   },
-  setupFilesAfterEnv: ['<rootDir>spec/setup.js'],
+  setupFilesAfterEnv: ['<rootDir>jest/setup.js'],
   moduleDirectories: ['node_modules', 'src']
 };

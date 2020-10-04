@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AppBody } from './styled';
+import { AppBody } from './App.styles';
 import Header from './components/Header/Header';
 
 const App: React.FunctionComponent = () => (

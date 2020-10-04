@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { HeaderContainer } from './styled';
-import Logo from 'assets/icons/logo.svg';
+import { HeaderContainer } from './Header.styles';
+import Logo from '../../assets/icons/logo.svg';
 
 const Header: FunctionComponent = () => (
   <HeaderContainer>

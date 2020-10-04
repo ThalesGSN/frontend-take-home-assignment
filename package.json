@@ -35,7 +35,7 @@
   },
   "scripts": {
     "test": "jest",
-    "lint": "eslint './src/**/*.{ts,tsx}' './spec/**/*.{ts,tsx}' --quiet",
+    "lint": "eslint './src/**/*.{ts,tsx}' 'jest/**/*.{ts,tsx}' --quiet",
     "start": "parcel ./src/index.html",
     "build": "parcel build ./src/index.html",
     "cypress:open": "cypress open"
