@@ -8,5 +8,6 @@ describe('App', () => {
 
     expect(component.exists()).toEqual(true);
     expect(component.find('Header').exists()).toEqual(true);
+    expect(component.find('SavingGoalContainer').exists()).toEqual(true);
   });
 });

@@ -11,6 +11,6 @@ module.exports = {
   moduleNameMapper: {
     '\\.(svg|jpg|png|css)$': '<rootDir>/jest/empty-module.js'
   },
-  setupFilesAfterEnv: ['<rootDir>jest/setup.js'],
+  setupFilesAfterEnv: ['<rootDir>/jest/setup.js'],
   moduleDirectories: ['node_modules', 'src']
 };
