@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Container } from './SavingGoalContainer.styles';
+import HouseSavingGoalCard from '../HouseSavingGoalCard/HouseSavingGoalCard';
 
 const SavingGoalContainer: FunctionComponent = () => (
   <Container>
@@ -9,7 +10,5 @@ const SavingGoalContainer: FunctionComponent = () => (
     <HouseSavingGoalCard />
   </Container>
 );
-
-const HouseSavingGoalCard: FunctionComponent = () => <React.Fragment />;
 
 export default SavingGoalContainer;

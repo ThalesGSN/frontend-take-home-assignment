@@ -4,7 +4,7 @@ import Logo from '../../assets/icons/logo.svg';
 
 const Header: FunctionComponent = () => (
   <HeaderContainer>
-    <img src={Logo} alt="Origin Financial Logo" />
+    <img src={Logo} alt="Origin Financial Logo" aria-hidden={'true'} />
   </HeaderContainer>
 );
 
