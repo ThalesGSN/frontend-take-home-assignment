@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { IsDesktopMediaQuery } from './utils/constants';
 
 export const AppBody = styled.div`
   display: grid;
@@ -8,8 +9,7 @@ export const AppBody = styled.div`
   width: 100vw;
   height: 100vh;
 
-  //Is Desktop
-  @media only screen and (min-width: 600px) {
+  ${IsDesktopMediaQuery} {
     grid-template-rows: 8vh auto 8vh;
     grid-template-columns: 1fr minmax(370px, 600px) 1fr;
   }

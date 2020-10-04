@@ -12,12 +12,7 @@
     "typeRoots" : ["node_modules/@types", "src/assets/types"],
     "module": "esnext",
     "esModuleInterop": true,
-    "baseUrl": "./src",
-    "paths": {
-      "@assets/*": ["assets/*"],
-      "@icons/*": ["assets/icons/*"],
-      "@components/*": ["components/*"]
-    }
+    "baseUrl": "./src"
   },
   "include": ["**/*"]
 }

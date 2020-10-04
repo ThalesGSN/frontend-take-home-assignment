@@ -4,7 +4,7 @@ import HouseSavingGoalCard from '../HouseSavingGoalCard/HouseSavingGoalCard';
 
 const SavingGoalContainer: FunctionComponent = () => (
   <Container>
-    <p>
+    <p className="title">
       Let&apos;s plan your <strong>saving goal.</strong>
     </p>
     <HouseSavingGoalCard />

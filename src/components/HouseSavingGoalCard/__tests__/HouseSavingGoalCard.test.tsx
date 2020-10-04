@@ -18,7 +18,7 @@ describe('HouseSavingGoalCard', () => {
   });
 
   it('should have a "Saving goal" subtitle', () => {
-    expect(savingGoalContainer.find('p').text()).toBe('Saving goal');
+    expect(savingGoalContainer.find('span').text()).toBe('Saving goal');
   });
 
   it('should have a TotalAmountInput component', () => {
@@ -34,6 +34,6 @@ describe('HouseSavingGoalCard', () => {
   });
 
   it('should have a ConfirmButton component', () => {
-    expect(savingGoalContainer.find('button').text()).toBe('Confirm');
+    expect(savingGoalContainer.find('ConfirmButton').text()).toBe('Confirm');
   });
 });
