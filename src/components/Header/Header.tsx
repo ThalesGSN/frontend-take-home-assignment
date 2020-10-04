@@ -1,5 +1,11 @@
 import React, { FunctionComponent } from 'react';
+import { HeaderContainer } from './styled';
+import Logo from 'assets/icons/logo.svg';
 
-const Header: FunctionComponent = () => <header />;
+const Header: FunctionComponent = () => (
+  <HeaderContainer>
+    <img src={Logo} alt="Origin Financial Logo" />
+  </HeaderContainer>
+);
 
 export default Header;

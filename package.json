@@ -42,9 +42,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OriginFinancial/frontend-challenge.git"
+    "url": "git+https://github.com/ThalesGSN/frontend-challenge.git"
   },
-  "author": "",
+  "author": "ThalesGSN",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/OriginFinancial/frontend-challenge/issues"
