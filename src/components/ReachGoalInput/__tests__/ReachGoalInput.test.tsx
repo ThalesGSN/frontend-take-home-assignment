@@ -8,7 +8,6 @@ describe('Reach goal input', () => {
   beforeEach(() => {
     reachGoalInput = mount(<ReachGoalInput />);
   });
-
   it('should have a "Reach goal by" Label', () => {
     expect(
       reachGoalInput
@@ -18,14 +17,20 @@ describe('Reach goal input', () => {
     ).toBe('Reach goal by');
   });
   it('should have a previous month button', () => {
-    expect(reachGoalInput.find('.previous').prop('aria-label')).toBe(
-      'Select previous month'
-    );
+    expect(
+      reachGoalInput
+        .find('.previous')
+        .last()
+        .prop('aria-label')
+    ).toBe('Select previous month');
   });
   it('should have a next month button', () => {
-    expect(reachGoalInput.find('.next').prop('aria-label')).toBe(
-      'Select next month'
-    );
+    expect(
+      reachGoalInput
+        .find('.next')
+        .last()
+        .prop('aria-label')
+    ).toBe('Select next month');
   });
   it('should have a selected month label', () => {
     const thisMonth = Months[new Date().getMonth()];
@@ -76,8 +81,9 @@ describe('Reach goal input', () => {
   it('should select next year', () => {
     let month = new Date().getMonth();
 
+    const nextButton = reachGoalInput.find('.next').last();
     while (month < 12) {
-      reachGoalInput.find('.next').simulate('click');
+      nextButton.simulate('click');
       month++;
     }
 
@@ -92,8 +98,9 @@ describe('Reach goal input', () => {
   it('should select previous year', () => {
     let month = new Date().getMonth();
 
+    const previousButton = reachGoalInput.find('.previous').last();
     while (month > -1) {
-      reachGoalInput.find('.previous').simulate('click');
+      previousButton.simulate('click');
       month--;
     }
 

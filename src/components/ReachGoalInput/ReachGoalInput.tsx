@@ -1,21 +1,24 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { InputContainer } from './ReachGoalInput.styles';
-import Arrow from '../../assets/icons/arrow.svg';
-import { Months } from '../../utils/constants';
-import { ZeroPad } from '../../utils/functions';
 import { UseTransactionFrame } from '../../utils/types/useTransactionFrame';
 import { ReachGoalInputDate } from '../../utils/types/ReachGoalInputDate';
+import ReachGoalButton from './ReachGoalButton/ReachGoalButton';
+import DateTimeShow from './DateTimeShow/DateTimeShow';
 // Disabling rule because of react-spring lack of support for TypeScrypt
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
-import { useTransition, animated } from 'react-spring';
+import { useTransition } from 'react-spring';
+import {
+  GenerateAnimationKey,
+  OnNextTransitionAnimation,
+  OnPreviousTransitionAnimation
+} from './ReachGoalInput.Animations';
 
 const ReachGoalInput: FunctionComponent = () => {
   const now = new Date();
-
   const [year, setYear] = useState(now.getFullYear() + 1);
   const [month, setMonth] = useState(now.getMonth());
-  const [isNext, setIsNext] = useState(true);
+  const [shouldShowNextAnimation, setShouldShowNextAnimation] = useState(true);
   const [disableSelectPreviousMonth, setDisableSelectPreviousMonth] = useState(
     false
   );
@@ -24,8 +27,6 @@ const ReachGoalInput: FunctionComponent = () => {
     year,
     month
   };
-  const getAnimationKey = (item: ReachGoalInputDate) =>
-    `${item.year}${item.month}`;
 
   useEffect(() => {
     const currentMonthIsSelected =
@@ -34,11 +35,12 @@ const ReachGoalInput: FunctionComponent = () => {
       setDisableSelectPreviousMonth(true);
       return;
     }
+
     setDisableSelectPreviousMonth(false);
   }, [year, month, now]);
 
   const handleSelectNextMonth = () => {
-    setIsNext(true);
+    setShouldShowNextAnimation(true);
 
     const monthIsDecember = month === 11;
     if (monthIsDecember) {
@@ -51,7 +53,7 @@ const ReachGoalInput: FunctionComponent = () => {
   };
 
   const handleSelectPreviousMonth = () => {
-    setIsNext(false);
+    setShouldShowNextAnimation(false);
 
     const monthIsJanuary = month === 0;
     if (monthIsJanuary) {
@@ -63,59 +65,50 @@ const ReachGoalInput: FunctionComponent = () => {
     setMonth(month => month - 1);
   };
 
-  const next = useTransition(currentValue, getAnimationKey, {
-    from: { opacity: 0, transform: 'translate3d(100%,0,0)' },
-    enter: { opacity: 1, transform: 'translate3d(-50%,0,0)' },
-    leave: { opacity: 0, transform: 'translate3d(-50%,0,0)' }
-  });
+  const nextAnimation = useTransition(
+    currentValue,
+    GenerateAnimationKey,
+    OnNextTransitionAnimation
+  );
 
-  const previous = useTransition(currentValue, getAnimationKey, {
-    from: { opacity: 0, transform: 'translate3d(-50%,0,0)' },
-    leave: { opacity: 0, transform: 'translate3d(100%,0,0)' },
-    enter: { opacity: 1, transform: 'translate3d(-50%,0,0)' }
-  });
+  const previousAnimation = useTransition(
+    currentValue,
+    GenerateAnimationKey,
+    OnPreviousTransitionAnimation
+  );
 
-  const transitions = isNext ? next : previous;
+  const animationFrames = shouldShowNextAnimation
+    ? nextAnimation
+    : previousAnimation;
 
   return (
     <InputContainer>
       <span>Reach goal by</span>
       <span className="inputWrapper">
-        <button
-          className="previous iconButton"
-          aria-label="Select previous month"
+        <ReachGoalButton
+          className="previous"
           onClick={handleSelectPreviousMonth}
           disabled={disableSelectPreviousMonth}
-          aria-hidden={disableSelectPreviousMonth ? 'false' : 'true'}
-        >
-          <img src={Arrow} alt="arrow" aria-hidden="true" />
-        </button>
+          aria-label="Select previous month"
+        />
 
         <article aria-label="Selected month">
-          {transitions.map(({ item, key, props }: UseTransactionFrame) => {
-            const dateTime = `${item.year}-${ZeroPad(
-              item.month + 1,
-              2
-            )}-01 00:00`;
-
-            return (
-              <animated.div key={key} style={props}>
-                <time dateTime={dateTime}>
-                  <span>{Months[item.month]}</span>
-                  <span>{item.year}</span>
-                </time>
-              </animated.div>
-            );
-          })}
+          {animationFrames.map(({ item, key, props }: UseTransactionFrame) => (
+            <DateTimeShow
+              key={key}
+              generatedKey={key}
+              date={item}
+              styles={props}
+            />
+          ))}
         </article>
 
-        <button
+        <ReachGoalButton
+          className="next"
           onClick={handleSelectNextMonth}
-          className="next iconButton"
           aria-label="Select next month"
-        >
-          <img src={Arrow} className="invert" alt="arrow" aria-hidden="true" />
-        </button>
+          invertArrow={true}
+        />
       </span>
     </InputContainer>
   );
