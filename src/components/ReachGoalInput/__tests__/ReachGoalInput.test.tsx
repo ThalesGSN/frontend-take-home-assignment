@@ -5,9 +5,11 @@ import { Months } from '../../../utils/constants';
 
 describe('Reach goal input', () => {
   let reachGoalInput: ReactWrapper;
+
   beforeEach(() => {
     reachGoalInput = mount(<ReachGoalInput />);
   });
+
   it('should have a "Reach goal by" Label', () => {
     expect(
       reachGoalInput
@@ -16,6 +18,7 @@ describe('Reach goal input', () => {
         .text()
     ).toBe('Reach goal by');
   });
+
   it('should have a previous month button', () => {
     expect(
       reachGoalInput
@@ -24,6 +27,7 @@ describe('Reach goal input', () => {
         .prop('aria-label')
     ).toBe('Select previous month');
   });
+
   it('should have a next month button', () => {
     expect(
       reachGoalInput
@@ -41,6 +45,7 @@ describe('Reach goal input', () => {
         .text()
     ).toBe(thisMonth);
   });
+
   it('should have a selected year label', () => {
     const nextYear = `${new Date().getFullYear() + 1}`;
     expect(
@@ -95,6 +100,7 @@ describe('Reach goal input', () => {
         .text()
     ).toBe(twoYearsFromCurrent);
   });
+
   it('should select previous year', () => {
     let month = new Date().getMonth();
 
@@ -111,5 +117,16 @@ describe('Reach goal input', () => {
         .last()
         .text()
     ).toBe(thisYear);
+  });
+
+  it('should block user from select past dates', () => {
+    const previousButton = reachGoalInput.find('.previous').last();
+
+    for (let clickedTimes = 0; clickedTimes < 12; clickedTimes++) {
+      previousButton.simulate('click');
+    }
+
+    const currentPreviousButton = reachGoalInput.find('.previous').last();
+    expect(currentPreviousButton.prop('disabled')).toBe(true);
   });
 });
