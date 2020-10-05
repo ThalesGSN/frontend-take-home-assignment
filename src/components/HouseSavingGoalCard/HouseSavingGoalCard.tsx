@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { Card, ConfirmButton } from './HouseSavingGoalCard.styles';
 import house from '../../assets/icons/house.svg';
 import TotalAmountInput from '../TotalAmountInput/TotalAmountInput';
+import ReachGoalInput from '../ReachGoalInput/ReachGoalInput';
 
 const HouseSavingGoalCard: FunctionComponent = () => (
   <Card>
@@ -14,7 +15,7 @@ const HouseSavingGoalCard: FunctionComponent = () => (
     <ConfirmButton>Confirm</ConfirmButton>
   </Card>
 );
-const ReachGoalInput: FunctionComponent = () => <React.Fragment />;
+
 const SavingGoalResults: FunctionComponent = () => <React.Fragment />;
 
 export default HouseSavingGoalCard;
