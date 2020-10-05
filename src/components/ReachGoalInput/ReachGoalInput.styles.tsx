@@ -6,16 +6,31 @@ export const InputContainer = styled.div`
     font-weight: 500;
     margin-bottom: 5px;
   }
-  article time {
+  article {
+    overflow: hidden;
     display: flex;
-    flex-direction: column;
     align-content: center;
-    text-align: center;
-    flex-basis: 80%;
-    color: var(--main-color);
-    span:first-child {
-      font-size: 20px;
-      font-weight: 600;
+    transition: all 500ms linear;
+    div {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      will-change: transform, opacity;
+      time {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        text-align: center;
+        flex-basis: 80%;
+        color: var(--main-color);
+        cursor: default;
+        z-index: -1;
+        span:first-child {
+          font-size: 20px;
+          font-weight: 600;
+        }
+      }
     }
   }
 
@@ -27,6 +42,9 @@ export const InputContainer = styled.div`
     width: 56px;
     height: 56px;
     border: none;
+    &:disabled {
+      cursor: not-allowed;
+    }
 
     img {
       width: 10px;

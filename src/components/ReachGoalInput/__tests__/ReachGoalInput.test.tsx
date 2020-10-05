@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 import ReachGoalInput from '../ReachGoalInput';
 import { Months } from '../../../utils/constants';
 
 describe('Reach goal input', () => {
-  let reachGoalInput: ShallowWrapper;
+  let reachGoalInput: ReactWrapper;
   beforeEach(() => {
-    reachGoalInput = shallow(<ReachGoalInput />);
+    reachGoalInput = mount(<ReachGoalInput />);
   });
 
   it('should have a "Reach goal by" Label', () => {
@@ -49,22 +49,26 @@ describe('Reach goal input', () => {
   it('should select next month', () => {
     const thisMonth = new Date().getMonth();
     const expectedMonth = thisMonth !== 11 ? Months[thisMonth + 1] : 'January';
-    reachGoalInput.find('.next').simulate('click');
+
+    reachGoalInput.find('button.next').simulate('click');
+    // using .at(2) because of useTransition animation that duplicates the time node
     expect(
       reachGoalInput
         .find('time span')
-        .first()
+        .at(2)
         .text()
     ).toBe(expectedMonth);
   });
   it('should select previous month', () => {
     const thisMonth = new Date().getMonth();
     const expectedMonth = thisMonth !== 0 ? Months[thisMonth - 1] : 'December';
-    reachGoalInput.find('.previous').simulate('click');
+
+    reachGoalInput.find('button.previous').simulate('click');
+    // using .at(2) because of useTransition animation that duplicates the time node
     expect(
       reachGoalInput
         .find('time span')
-        .first()
+        .at(2)
         .text()
     ).toBe(expectedMonth);
   });
@@ -81,7 +85,7 @@ describe('Reach goal input', () => {
     expect(
       reachGoalInput
         .find('time span')
-        .at(1)
+        .last()
         .text()
     ).toBe(twoYearsFromCurrent);
   });
@@ -97,7 +101,7 @@ describe('Reach goal input', () => {
     expect(
       reachGoalInput
         .find('time span')
-        .at(1)
+        .last()
         .text()
     ).toBe(thisYear);
   });
