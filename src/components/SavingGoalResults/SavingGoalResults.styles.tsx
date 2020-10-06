@@ -9,6 +9,9 @@ export const ResultsContainer = styled.section`
   border: 1px solid #e1e8ed;
   border-radius: 4px;
   box-shadow: 0 1px 4px rgba(150, 164, 176, 0.1);
+  ${IsDesktopMediaQuery} {
+    grid-template-rows: 60% 40%;
+  }
 `;
 
 export const AmountContainer = styled.div`
@@ -39,12 +42,14 @@ export const AmountSpan = styled.span`
 `;
 
 export const ResultsDetails = styled.details`
+  display: flex;
+  align-items: center;
   background-color: var(--background-color);
   font-size: 12px;
   text-align: justify;
-  align-self: center;
+  align-self: stretch;
   justify-self: stretch;
-  padding: 18px 32px;
+  padding: 0 32px;
   summary {
     display: none;
     list-style-type: none; /* Firefox */

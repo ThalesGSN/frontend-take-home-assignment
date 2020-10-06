@@ -17,7 +17,7 @@ export const InputContainer = styled.label`
     outline: none;
     background: none;
     border: none;
-    margin-left: 10px;
+    margin-left: 15px;
     color: var(--main-color);
     font-weight: 600;
     font-size: 18px;
