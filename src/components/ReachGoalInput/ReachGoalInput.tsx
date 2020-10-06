@@ -6,8 +6,7 @@ import DateTimeShow from './DateTimeShow/DateTimeShow';
 import { useTransition } from 'react-spring';
 import {
   GenerateAnimationKey,
-  OnNextTransitionAnimation,
-  OnPreviousTransitionAnimation
+  OnNextTransitionAnimation
 } from './ReachGoalInput.animations';
 import { addMonths } from 'date-fns';
 
@@ -19,7 +18,7 @@ export interface ReachGoalInputProps {
 const ReachGoalInput = (props: ReachGoalInputProps) => {
   const { initialDate, onChange } = props;
 
-  const [time, setTime] = useState(initialDate);
+  const [date, setTime] = useState(initialDate);
 
   const [shouldShowNextAnimation, setShouldShowNextAnimation] = useState(true);
   const [disableSelectPreviousMonth, setDisableSelectPreviousMonth] = useState(
@@ -29,15 +28,15 @@ const ReachGoalInput = (props: ReachGoalInputProps) => {
   useEffect(() => {
     const now = new Date();
     const currentMonthIsSelected =
-      now.getFullYear() === time.getFullYear() &&
-      now.getMonth() === time.getMonth();
+      now.getFullYear() === date.getFullYear() &&
+      now.getMonth() === date.getMonth();
     if (currentMonthIsSelected) {
       setDisableSelectPreviousMonth(true);
       return;
     }
 
     setDisableSelectPreviousMonth(false);
-  }, [time]);
+  }, [date]);
 
   const handleSelectNextMonth = () => {
     setShouldShowNextAnimation(true);
@@ -49,7 +48,7 @@ const ReachGoalInput = (props: ReachGoalInputProps) => {
   };
 
   const handleSelectPreviousMonth = () => {
-    setShouldShowNextAnimation(true);
+    setShouldShowNextAnimation(false);
     setTime((time: Date) => {
       const result = addMonths(time, -1);
       onChange(result);
@@ -57,21 +56,11 @@ const ReachGoalInput = (props: ReachGoalInputProps) => {
     });
   };
 
-  const nextAnimation = useTransition(
-    time,
+  const animationFrames = useTransition(
+    { shouldShowNextAnimation, date },
     GenerateAnimationKey,
     OnNextTransitionAnimation
   );
-
-  const previousAnimation = useTransition(
-    time,
-    GenerateAnimationKey,
-    OnPreviousTransitionAnimation
-  );
-
-  const animationFrames = shouldShowNextAnimation
-    ? nextAnimation
-    : previousAnimation;
 
   return (
     <InputContainer aria-required="true">
@@ -89,7 +78,7 @@ const ReachGoalInput = (props: ReachGoalInputProps) => {
             <DateTimeShow
               key={key}
               generatedKey={key}
-              date={item}
+              date={item.date}
               styles={props}
             />
           ))}

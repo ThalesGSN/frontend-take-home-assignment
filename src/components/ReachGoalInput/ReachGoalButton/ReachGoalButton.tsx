@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import Arrow from '../../../assets/icons/arrow.svg';
 import { ButtonContainer } from './ReachGoalButton.styles';
 
@@ -10,8 +10,6 @@ export interface ReachGoalButtonProps {
   disabled?: boolean;
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 const ReachGoalButton = (props: ReachGoalButtonProps) => (
   <ButtonContainer
     className={props.className}

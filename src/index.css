@@ -25,6 +25,7 @@ html {
   --contrast-color: #657786;
   --primary-color: #1B31A8;
   --secondary-color: #0079FF;
+  --enabled-color: #E1E8ED;
 }
 
 html[data-theme='dark'] {

@@ -10,7 +10,7 @@ export const AppBody = styled.div`
   height: 100vh;
 
   ${IsDesktopMediaQuery} {
-    grid-template-rows: 8vh auto 8vh;
-    grid-template-columns: 1fr minmax(370px, 600px) 1fr;
+    grid-template-rows: 8vh 700px 1fr;
+    grid-template-columns: 1fr minmax(370px, 560px) 1fr;
   }
 `;

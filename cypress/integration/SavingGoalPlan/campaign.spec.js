@@ -1,9 +1,5 @@
 describe('SavingGoalPlan UI', () => {
-  beforeEach(() => {
+  beforeEach(() => {});
 
-  });
-
-  it('Should Test', () => {
-
-  });
+  it('Should Test', () => {});
 });

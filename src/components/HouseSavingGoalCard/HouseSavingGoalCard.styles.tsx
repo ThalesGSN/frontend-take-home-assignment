@@ -9,31 +9,61 @@ export const Card = styled.section`
   padding: 33px 16px;
 
   display: grid;
-  grid-template-rows: 7% 5% 5% 20% 20% 30% 13%;
+  grid-template-rows: 20% 15% 15% 30% 20%;
+  grid-template-columns: 100%;
+  row-gap: 10px;
+  grid-template-areas:
+    'Header'
+    'TotalAmount'
+    'ReachGoal'
+    'Result'
+    'Confirm';
+
+  ${IsDesktopMediaQuery} {
+    grid-template-rows: 25% 20% 30% 25%;
+    grid-template-columns: 50% 50%;
+
+    column-gap: 15px;
+    row-gap: 5px;
+    padding: 40px;
+    grid-template-areas:
+      'Header Header'
+      'TotalAmount ReachGoal'
+      'Result Result'
+      'Confirm Confirm';
+    border-radius: 8px;
+  }
+`;
+
+export const CardHeader = styled.section`
+  grid-area: Header;
+  h3 {
+    font-weight: 600;
+    margin: 5px 0;
+  }
 
   img {
     width: 32px;
   }
 
-  h3 {
-    font-weight: 600;
-    margin: 5px 0;
-  }
   .label {
     color: var(--contrast-color);
     font-size: 14px;
     margin-top: 5px;
   }
-
   ${IsDesktopMediaQuery} {
-    border-radius: 8px;
     img {
       width: 40px;
+    }
+    .label {
+      font-size: 16px;
     }
   }
 `;
 
 export const ConfirmButton = styled.button`
+  grid-area: Confirm;
+  place-self: center;
   width: 100%;
   max-width: 400px;
   height: 55px;

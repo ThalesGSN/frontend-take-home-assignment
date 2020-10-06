@@ -8,5 +8,7 @@ export const HeaderContainer = styled.header`
   background-color: var(--foreground-color);
   img {
     margin-left: 5%;
+    max-width: 100px;
+    width: 15vw;
   }
 `;

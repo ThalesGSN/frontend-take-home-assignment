@@ -5,14 +5,14 @@ export const ButtonContainer = styled.button`
   align-content: center;
   justify-content: center;
 
-  width: 56px;
+  width: 48px;
   height: 56px;
   border: none;
   cursor: pointer;
-
-  background-color: var(--background-color);
+  background-color: var(--enabled-color);
 
   &:disabled {
     cursor: not-allowed;
+    background-color: var(--background-color);
   }
 `;

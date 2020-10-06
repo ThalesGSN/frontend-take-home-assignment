@@ -4,7 +4,7 @@ export const CurrencyMaskOptions = {
   includeThousandsSeparator: true,
   thousandsSeparatorSymbol: ',',
   allowDecimal: false,
-  integerLimit: 7,
+  integerLimit: 10,
   allowNegative: false,
   allowLeadingZeroes: false
 };

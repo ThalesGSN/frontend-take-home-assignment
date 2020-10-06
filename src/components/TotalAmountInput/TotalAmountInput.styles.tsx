@@ -1,11 +1,16 @@
 import styled from 'styled-components';
-import { IsDesktopMediaQuery } from '../../utils/constants';
 
 export const InputContainer = styled.label`
+  grid-area: TotalAmount;
+
+  display: flex;
+  flex-direction: column;
+
+  font-size: 16px;
+  font-weight: 500;
+
   span {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
   }
   .masked-input {
     -webkit-appearance: none;

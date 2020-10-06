@@ -2,18 +2,19 @@ import styled from 'styled-components';
 import { IsDesktopMediaQuery } from '../../utils/constants';
 
 export const Container = styled.main`
-  grid-row: 2;
-  place-self: stretch;
-
   display: grid;
+  place-self: stretch;
   grid-template-rows: 10% auto;
   grid-template-columns: 100%;
   justify-content: center;
+
   font-size: 18px;
 
   ${IsDesktopMediaQuery} {
+    grid-area: 2 / 3 / 2 / 3;
     grid-column: 2;
     font-size: 1.5vw;
+    grid-template-rows: 10vh auto;
   }
 
   p.title {
@@ -24,6 +25,8 @@ export const Container = styled.main`
     animation-duration: 500ms;
     animation-iteration-count: 1;
     animation-timing-function: linear;
+    place-self: center;
+
     strong {
       font-weight: 600;
     }

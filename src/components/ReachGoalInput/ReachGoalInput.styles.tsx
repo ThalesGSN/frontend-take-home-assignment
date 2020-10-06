@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 
 export const InputContainer = styled.div`
+  grid-area: ReachGoal;
+  display: flex;
+  flex-direction: column;
+
+  font-size: 16px;
+  font-weight: 500;
   span {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
   }
 
   article {

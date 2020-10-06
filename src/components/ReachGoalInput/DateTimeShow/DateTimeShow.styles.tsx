@@ -19,6 +19,7 @@ export const DateTimeContainer = styled.section`
       z-index: -1;
 
       span:first-child {
+        margin: 0;
         font-size: 20px;
         font-weight: 600;
       }

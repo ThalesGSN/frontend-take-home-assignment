@@ -1,11 +1,13 @@
 import React, { useEffect, useRef } from 'react';
-import { ResultsContainer } from './SavingGoalResults.styles';
+import {
+  AmountContainer,
+  AmountSpan,
+  ResultsContainer,
+  ResultsDetails
+} from './SavingGoalResults.styles';
 import { Months } from '../../utils/constants';
 import { CurrencyFormat } from '../../utils/functions';
-import {
-  CurrencyAnimation,
-  CurrencyAnimationOptions
-} from './SavingGoalResults.animations';
+import { AnimateRef } from './SavingGoalResults.animations';
 
 export interface SavingGoalResultsProps {
   result: number;
@@ -16,24 +18,24 @@ export interface SavingGoalResultsProps {
 
 const SavingGoalResults = (props: SavingGoalResultsProps) => {
   const { numberOfMonthsToSave, totalAmount, result, finalDate } = props;
-  const resultRef = useRef<HTMLMarqueeElement>(null);
+  const monthsToSaveRef = useRef<HTMLElement>(null);
+  const totalAmountRef = useRef<HTMLElement>(null);
+  const finalDateRef = useRef<HTMLElement>(null);
+  const resultRef = useRef<HTMLElement>(null);
+
   const year = finalDate.getFullYear();
   const month = finalDate.getMonth();
 
-  useEffect(() => {
-    const result = resultRef.current;
-    if (!result) {
-      return;
-    }
-
-    result.animate(CurrencyAnimation, CurrencyAnimationOptions);
-  }, [result]);
+  useEffect(() => AnimateRef(resultRef), [result]);
+  useEffect(() => AnimateRef(monthsToSaveRef), [numberOfMonthsToSave]);
+  useEffect(() => AnimateRef(totalAmountRef), [totalAmount]);
+  useEffect(() => AnimateRef(finalDateRef), [finalDate]);
 
   return (
     <ResultsContainer aria-label="Results">
-      <div>
+      <AmountContainer>
         <span aria-hidden="true">
-          Monthly <span className="amount">amount</span>
+          Monthly <AmountSpan>amount</AmountSpan>
         </span>
         <mark
           className="animate"
@@ -42,19 +44,23 @@ const SavingGoalResults = (props: SavingGoalResultsProps) => {
         >
           <strong>{CurrencyFormat(result)}</strong>
         </mark>
-      </div>
-      <details open>
+      </AmountContainer>
+      <ResultsDetails open>
         <summary />
         <p>
           You’re planning{' '}
-          <strong>{numberOfMonthsToSave} monthly deposits</strong> to reach your{' '}
-          <strong>{CurrencyFormat(totalAmount)}</strong> goal by{' '}
-          <strong>
+          <strong ref={monthsToSaveRef}>
+            {numberOfMonthsToSave} monthly deposits
+          </strong>{' '}
+          to reach your{' '}
+          <strong ref={totalAmountRef}>{CurrencyFormat(totalAmount)}</strong>{' '}
+          goal by{' '}
+          <strong ref={finalDateRef} className="finalDate">
             {Months[month]} {year}
           </strong>
           .
         </p>
-      </details>
+      </ResultsDetails>
     </ResultsContainer>
   );
 };
