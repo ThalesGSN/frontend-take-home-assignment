@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { InputContainer } from './ReachGoalInput.styles';
-import { UseTransactionFrame } from '../../utils/types/useTransactionFrame';
 import ReachGoalButton from './ReachGoalButton/ReachGoalButton';
 import DateTimeShow from './DateTimeShow/DateTimeShow';
-import { useTransition } from 'react-spring';
-import {
-  GenerateAnimationKey,
-  OnNextTransitionAnimation
-} from './ReachGoalInput.animations';
+import { ReachGoalByRefAnimation } from './ReachGoalInput.animations';
 import { addMonths } from 'date-fns';
 
 export interface ReachGoalInputProps {
@@ -18,29 +13,23 @@ export interface ReachGoalInputProps {
 const ReachGoalInput = (props: ReachGoalInputProps) => {
   const { initialDate, onChange } = props;
 
-  const [date, setTime] = useState(initialDate);
-
-  const [shouldShowNextAnimation, setShouldShowNextAnimation] = useState(true);
+  const [date, setDate] = useState(initialDate);
   const [disableSelectPreviousMonth, setDisableSelectPreviousMonth] = useState(
     false
   );
+  const dataTimeShowRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const now = new Date();
-    const currentMonthIsSelected =
+    const isCurrentMonthSelected =
       now.getFullYear() === date.getFullYear() &&
       now.getMonth() === date.getMonth();
-    if (currentMonthIsSelected) {
-      setDisableSelectPreviousMonth(true);
-      return;
-    }
-
-    setDisableSelectPreviousMonth(false);
+    ReachGoalByRefAnimation(dataTimeShowRef);
+    setDisableSelectPreviousMonth(isCurrentMonthSelected);
   }, [date]);
 
   const handleSelectNextMonth = () => {
-    setShouldShowNextAnimation(true);
-    setTime((time: Date) => {
+    setDate((time: Date) => {
       const result = addMonths(time, 1);
       onChange(result);
       return result;
@@ -48,19 +37,12 @@ const ReachGoalInput = (props: ReachGoalInputProps) => {
   };
 
   const handleSelectPreviousMonth = () => {
-    setShouldShowNextAnimation(false);
-    setTime((time: Date) => {
+    setDate((time: Date) => {
       const result = addMonths(time, -1);
       onChange(result);
       return result;
     });
   };
-
-  const animationFrames = useTransition(
-    { shouldShowNextAnimation, date },
-    GenerateAnimationKey,
-    OnNextTransitionAnimation
-  );
 
   return (
     <InputContainer aria-required="true">
@@ -73,15 +55,8 @@ const ReachGoalInput = (props: ReachGoalInputProps) => {
           aria-label="Select previous month"
         />
 
-        <article aria-label="Selected month">
-          {animationFrames.map(({ item, key, props }: UseTransactionFrame) => (
-            <DateTimeShow
-              key={key}
-              generatedKey={key}
-              date={item.date}
-              styles={props}
-            />
-          ))}
+        <article aria-label="Selected month" ref={dataTimeShowRef}>
+          <DateTimeShow date={date} />
         </article>
 
         <ReachGoalButton

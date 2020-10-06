@@ -1,9 +1,9 @@
-import { MutableRefObject } from 'react';
+import { GenerateRefAnimationTrigger } from '../../utils/functions';
 
 export const ChangeResultAnimation: Keyframe[] = [
   {
     transform: 'translateY(-20px)',
-    opacity: 0
+    opacity: 0.1
   },
   {
     transform: 'translateY(0)',
@@ -11,17 +11,13 @@ export const ChangeResultAnimation: Keyframe[] = [
   }
 ];
 
-export const ChangeResultAnimationOptions = {
-  duration: 250,
+export const ChangeResultAnimationOptions: KeyframeAnimationOptions = {
+  duration: 500,
   iterations: 1,
-  easing: 'ease-in'
+  easing: 'ease-out'
 };
 
-export const AnimateRef = (ref: MutableRefObject<HTMLElement>) => {
-  const element = ref.current;
-  if (!element) {
-    return;
-  }
-
-  element.animate(ChangeResultAnimation, ChangeResultAnimationOptions);
-}
+export const AnimateResultRef = GenerateRefAnimationTrigger(
+  ChangeResultAnimation,
+  ChangeResultAnimationOptions
+);

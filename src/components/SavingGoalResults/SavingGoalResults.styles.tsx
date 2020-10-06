@@ -53,6 +53,6 @@ export const ResultsDetails = styled.details`
     }
   }
   .finalDate {
-    line-break: strict;
+    white-space: nowrap;
   }
 `;

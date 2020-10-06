@@ -7,7 +7,7 @@ import {
 } from './SavingGoalResults.styles';
 import { Months } from '../../utils/constants';
 import { CurrencyFormat } from '../../utils/functions';
-import { AnimateRef } from './SavingGoalResults.animations';
+import { AnimateResultRef } from './SavingGoalResults.animations';
 
 export interface SavingGoalResultsProps {
   result: number;
@@ -26,10 +26,10 @@ const SavingGoalResults = (props: SavingGoalResultsProps) => {
   const year = finalDate.getFullYear();
   const month = finalDate.getMonth();
 
-  useEffect(() => AnimateRef(resultRef), [result]);
-  useEffect(() => AnimateRef(monthsToSaveRef), [numberOfMonthsToSave]);
-  useEffect(() => AnimateRef(totalAmountRef), [totalAmount]);
-  useEffect(() => AnimateRef(finalDateRef), [finalDate]);
+  useEffect(() => AnimateResultRef(resultRef), [result]);
+  useEffect(() => AnimateResultRef(monthsToSaveRef), [numberOfMonthsToSave]);
+  useEffect(() => AnimateResultRef(totalAmountRef), [totalAmount]);
+  useEffect(() => AnimateResultRef(finalDateRef), [finalDate]);
 
   return (
     <ResultsContainer aria-label="Results">

@@ -1,17 +1,14 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import { ZeroPad } from '../../../utils/functions';
 import { Months } from '../../../utils/constants';
 import { DateTimeContainer } from './DateTimeShow.styles';
-import { animated, ForwardedProps } from 'react-spring';
 
 export interface DateTimeShowProps {
-  generatedKey: string;
   date: Date;
-  styles: ForwardedProps<CSSProperties>;
 }
 
 const DateTimeShow = (props: DateTimeShowProps) => {
-  const { generatedKey, date, styles } = props;
+  const { date } = props;
   const year = date.getFullYear();
   const month = date.getMonth();
 
@@ -19,12 +16,10 @@ const DateTimeShow = (props: DateTimeShowProps) => {
 
   return (
     <DateTimeContainer>
-      <animated.div key={generatedKey} style={styles}>
-        <time dateTime={dateTime}>
-          <span>{Months[month]}</span>
-          <span>{year}</span>
-        </time>
-      </animated.div>
+      <time dateTime={dateTime}>
+        <span>{Months[month]}</span>
+        <span>{year}</span>
+      </time>
     </DateTimeContainer>
   );
 };

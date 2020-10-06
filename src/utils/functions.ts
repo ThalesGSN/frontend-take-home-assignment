@@ -1,3 +1,5 @@
+import { MutableRefObject } from 'react';
+
 export const ZeroPad = (num: number, places: number) => {
   return String(num).padStart(places, '0');
 };
@@ -18,4 +20,16 @@ export const GetNumberFromString = (numericString?: string) => {
   }
 
   return Number(numericString.replace(/\D/g, ''));
+};
+
+export const GenerateRefAnimationTrigger = (
+  keyframes: Keyframe[],
+  options?: KeyframeAnimationOptions
+) => (ref: MutableRefObject<HTMLElement>) => {
+  const element = ref.current;
+  if (!element) {
+    return;
+  }
+
+  element.animate(keyframes, options);
 };
