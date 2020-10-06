@@ -74,7 +74,7 @@ const ReachGoalInput = (props: ReachGoalInputProps) => {
     : previousAnimation;
 
   return (
-    <InputContainer>
+    <InputContainer aria-required="true">
       <span>Reach goal by</span>
       <span className="inputWrapper">
         <ReachGoalButton

@@ -32,6 +32,7 @@ const TotalAmountInput = (props: TotalAmountInputProps) => {
           placeholder="Amount"
           defaultValue={initialValue}
           onChange={handleChange}
+          aria-required="true"
         />
       </span>
     </InputContainer>

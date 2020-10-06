@@ -24,5 +24,4 @@ export const DateTimeContainer = styled.section`
       }
     }
   }
-
 `;
