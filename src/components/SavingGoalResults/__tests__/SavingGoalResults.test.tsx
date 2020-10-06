@@ -28,9 +28,10 @@ describe('SavingGoalResults', () => {
   });
 
   it('should render a monetary value to be saved', () => {
-    const monthlyValue = savingGoalResults.find('mark');
-    expect(monthlyValue.text()).toBe('$521');
-    expect(monthlyValue.prop('aria-label')).toBe('Monthly value to be saved');
+    expect(savingGoalResults.find('mark strong').text()).toBe('$521');
+    expect(savingGoalResults.find('mark').prop('aria-label')).toBe(
+      'Monthly value to be saved'
+    );
   });
 
   it('should render with A "Monthly" label', () => {

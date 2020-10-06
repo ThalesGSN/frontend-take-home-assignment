@@ -12,7 +12,7 @@ import {
   GenerateAnimationKey,
   OnNextTransitionAnimation,
   OnPreviousTransitionAnimation
-} from './ReachGoalInput.Animations';
+} from './ReachGoalInput.animations';
 
 const ReachGoalInput: FunctionComponent = () => {
   const now = new Date();
