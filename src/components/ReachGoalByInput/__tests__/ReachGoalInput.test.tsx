@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
-import ReachGoalInput from '../ReachGoalInput';
+import ReachGoalByInput from '../ReachGoalByInput';
 import { Months } from '../../../utils/constants';
 import { addYears } from 'date-fns';
 
@@ -10,7 +10,7 @@ describe('Reach goal input', () => {
   beforeEach(() => {
     const fourYearsFromNow = addYears(new Date(), 4);
     reachGoalInput = mount(
-      <ReachGoalInput initialDate={fourYearsFromNow} onChange={() => null} />
+      <ReachGoalByInput initialDate={fourYearsFromNow} onChange={() => null} />
     );
   });
 
@@ -65,11 +65,10 @@ describe('Reach goal input', () => {
     const expectedMonth = thisMonth !== 11 ? Months[thisMonth + 1] : 'January';
 
     reachGoalInput.find('button.next').simulate('click');
-    // using .at(2) because of useTransition animation that duplicates the time node
     expect(
       reachGoalInput
         .find('time span')
-        .at(2)
+        .first()
         .text()
     ).toBe(expectedMonth);
   });
@@ -78,11 +77,10 @@ describe('Reach goal input', () => {
     const expectedMonth = thisMonth !== 0 ? Months[thisMonth - 1] : 'December';
 
     reachGoalInput.find('button.previous').simulate('click');
-    // using .at(2) because of useTransition animation that duplicates the time node
     expect(
       reachGoalInput
         .find('time span')
-        .at(2)
+        .first()
         .text()
     ).toBe(expectedMonth);
   });

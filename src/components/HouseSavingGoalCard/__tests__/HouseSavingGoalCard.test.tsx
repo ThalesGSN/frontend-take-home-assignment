@@ -26,7 +26,7 @@ describe('HouseSavingGoalCard', () => {
   });
 
   it('should have a ReachGoalInput component', () => {
-    expect(savingGoalContainer.find('ReachGoalInput').exists()).toBe(true);
+    expect(savingGoalContainer.find('ReachGoalByInput').exists()).toBe(true);
   });
 
   it('should have a SavingGoalResults component', () => {

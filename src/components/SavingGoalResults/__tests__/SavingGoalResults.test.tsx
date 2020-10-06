@@ -2,6 +2,7 @@ import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import SavingGoalResults from '../SavingGoalResults';
 import { addYears } from 'date-fns';
+import { ResultsDetails } from '../SavingGoalResults.styles';
 
 describe('SavingGoalResults', () => {
   let savingGoalResults: ShallowWrapper;
@@ -19,7 +20,7 @@ describe('SavingGoalResults', () => {
   });
 
   it('should render with A "Monthly" label', () => {
-    const monthlyLabel = savingGoalResults.find('div span').first();
+    const monthlyLabel = savingGoalResults.find('span').first();
     expect(monthlyLabel.text()).toBe('Monthly amount');
     expect(monthlyLabel.prop('aria-hidden')).toBe('true');
   });
@@ -32,7 +33,7 @@ describe('SavingGoalResults', () => {
   });
 
   it('should render details of the saving plan', () => {
-    expect(savingGoalResults.find('details').text()).toBe(
+    expect(savingGoalResults.find(ResultsDetails).text()).toBe(
       'You’re planning 48 monthly deposits to reach your $25,000 goal by October 2024.'
     );
   });

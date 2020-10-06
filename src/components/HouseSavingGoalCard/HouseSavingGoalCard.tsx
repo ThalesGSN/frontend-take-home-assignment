@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState } from 'react';
 import { Card, CardHeader, ConfirmButton } from './HouseSavingGoalCard.styles';
 import house from '../../assets/icons/house.svg';
 import TotalAmountInput from '../TotalAmountInput/TotalAmountInput';
-import ReachGoalInput from '../ReachGoalInput/ReachGoalInput';
+import ReachGoalByInput from '../ReachGoalByInput/ReachGoalByInput';
 import SavingGoalResults from '../SavingGoalResults/SavingGoalResults';
 import { addYears, differenceInMonths } from 'date-fns';
 
@@ -32,7 +32,7 @@ const HouseSavingGoalCard: FunctionComponent = () => {
         initialValue={totalAmount}
         onChange={handleAmountChange}
       />
-      <ReachGoalInput
+      <ReachGoalByInput
         initialDate={reachGoal}
         onChange={handleReachGoalChange}
       />

@@ -27,7 +27,7 @@ export const GenerateRefAnimationTrigger = (
   options?: KeyframeAnimationOptions
 ) => (ref: MutableRefObject<HTMLElement>) => {
   const element = ref.current;
-  if (!element) {
+  if (!element || !element.animate) {
     return;
   }
 

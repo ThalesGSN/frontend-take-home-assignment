@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { InputContainer } from './ReachGoalInput.styles';
+import { InputContainer } from './ReachGoalByInput.styles';
 import ReachGoalButton from './ReachGoalButton/ReachGoalButton';
 import DateTimeShow from './DateTimeShow/DateTimeShow';
-import { ReachGoalByRefAnimation } from './ReachGoalInput.animations';
+import { ReachGoalByRefAnimation } from './ReachGoalByInput.animations';
 import { addMonths } from 'date-fns';
 
 export interface ReachGoalInputProps {
@@ -10,11 +10,11 @@ export interface ReachGoalInputProps {
   onChange: (date: Date) => void;
 }
 
-const ReachGoalInput = (props: ReachGoalInputProps) => {
+const ReachGoalByInput = (props: ReachGoalInputProps) => {
   const { initialDate, onChange } = props;
 
   const [date, setDate] = useState(initialDate);
-  const [disableSelectPreviousMonth, setDisableSelectPreviousMonth] = useState(
+  const [disabledSelectPreviousMonth, disableSelectPreviousMonth] = useState(
     false
   );
   const dataTimeShowRef = useRef<HTMLElement>(null);
@@ -25,7 +25,7 @@ const ReachGoalInput = (props: ReachGoalInputProps) => {
       now.getFullYear() === date.getFullYear() &&
       now.getMonth() === date.getMonth();
     ReachGoalByRefAnimation(dataTimeShowRef);
-    setDisableSelectPreviousMonth(isCurrentMonthSelected);
+    disableSelectPreviousMonth(isCurrentMonthSelected);
   }, [date]);
 
   const handleSelectNextMonth = () => {
@@ -51,7 +51,7 @@ const ReachGoalInput = (props: ReachGoalInputProps) => {
         <ReachGoalButton
           className="previous"
           onClick={handleSelectPreviousMonth}
-          disabled={disableSelectPreviousMonth}
+          disabled={disabledSelectPreviousMonth}
           aria-label="Select previous month"
         />
 
@@ -70,4 +70,4 @@ const ReachGoalInput = (props: ReachGoalInputProps) => {
   );
 };
 
-export default ReachGoalInput;
+export default ReachGoalByInput;
