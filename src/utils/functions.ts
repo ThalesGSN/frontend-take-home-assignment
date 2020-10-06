@@ -11,3 +11,11 @@ const currencyFormatFactory = new Intl.NumberFormat('en', {
 export const CurrencyFormat = (monetaryValue: number) => {
   return currencyFormatFactory.format(monetaryValue);
 };
+
+export const GetNumberFromString = (numericString?: string) => {
+  if (!numericString) {
+    return null;
+  }
+
+  return Number(numericString.replace(/\D/g, ''));
+};

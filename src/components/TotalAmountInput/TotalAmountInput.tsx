@@ -1,21 +1,22 @@
-import React, { FunctionComponent } from 'react';
+import React, { ChangeEvent } from 'react';
 import { InputContainer } from './TotalAmountInput.styles';
 import MaskedInput from 'react-text-mask';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+import { CurrencyMaskOptions } from './TotalAmountInput.masks';
+import { GetNumberFromString } from '../../utils/functions';
 
-const defaultMaskOptions = {
-  prefix: '',
-  suffix: '',
-  includeThousandsSeparator: true,
-  thousandsSeparatorSymbol: ',',
-  allowDecimal: false,
-  integerLimit: 7,
-  allowNegative: false,
-  allowLeadingZeroes: false
-};
+export interface TotalAmountInputProps {
+  initialValue: number;
+  onChange: (value: number) => void;
+}
 
-const TotalAmountInput: FunctionComponent = () => {
-  const currencyMask = createNumberMask(defaultMaskOptions);
+const TotalAmountInput = (props: TotalAmountInputProps) => {
+  const { initialValue, onChange } = props;
+  const currencyMask = createNumberMask(CurrencyMaskOptions);
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    onChange(GetNumberFromString(event.target.value));
+  };
 
   return (
     <InputContainer>
@@ -29,6 +30,8 @@ const TotalAmountInput: FunctionComponent = () => {
           mask={currencyMask}
           inputMode="numeric"
           placeholder="Amount"
+          defaultValue={initialValue}
+          onChange={handleChange}
         />
       </span>
     </InputContainer>

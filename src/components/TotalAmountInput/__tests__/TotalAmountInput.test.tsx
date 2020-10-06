@@ -5,7 +5,9 @@ import TotalAmountInput from '../TotalAmountInput';
 describe('TotalAmountInput', () => {
   let totalAmountInput: ShallowWrapper;
   beforeEach(() => {
-    totalAmountInput = shallow(<TotalAmountInput />);
+    totalAmountInput = shallow(
+      <TotalAmountInput initialValue={25000} onChange={() => null} />
+    );
   });
 
   it('should have a "Total Amount" Label', () => {

@@ -2,12 +2,16 @@ import * as React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
 import ReachGoalInput from '../ReachGoalInput';
 import { Months } from '../../../utils/constants';
+import { addYears } from 'date-fns';
 
 describe('Reach goal input', () => {
   let reachGoalInput: ReactWrapper;
 
   beforeEach(() => {
-    reachGoalInput = mount(<ReachGoalInput />);
+    const fourYearsFromNow = addYears(new Date(), 4);
+    reachGoalInput = mount(
+      <ReachGoalInput initialDate={fourYearsFromNow} onChange={() => null} />
+    );
   });
 
   it('should have a "Reach goal by" Label', () => {
@@ -47,7 +51,7 @@ describe('Reach goal input', () => {
   });
 
   it('should have a selected year label', () => {
-    const nextYear = `${new Date().getFullYear() + 1}`;
+    const nextYear = `${new Date().getFullYear() + 4}`;
     expect(
       reachGoalInput
         .find('time span')
@@ -92,13 +96,13 @@ describe('Reach goal input', () => {
       month++;
     }
 
-    const twoYearsFromCurrent = `${new Date().getFullYear() + 2}`;
+    const fourYearsFromNow = `${new Date().getFullYear() + 5}`;
     expect(
       reachGoalInput
         .find('time span')
         .last()
         .text()
-    ).toBe(twoYearsFromCurrent);
+    ).toBe(fourYearsFromNow);
   });
 
   it('should select previous year', () => {
@@ -110,7 +114,7 @@ describe('Reach goal input', () => {
       month--;
     }
 
-    const thisYear = `${new Date().getFullYear()}`;
+    const thisYear = `${new Date().getFullYear() + 3}`;
     expect(
       reachGoalInput
         .find('time span')
@@ -122,7 +126,7 @@ describe('Reach goal input', () => {
   it('should block user from select past dates', () => {
     const previousButton = reachGoalInput.find('.previous').last();
 
-    for (let clickedTimes = 0; clickedTimes < 12; clickedTimes++) {
+    for (let clickedTimes = 0; clickedTimes < 48; clickedTimes++) {
       previousButton.simulate('click');
     }
 

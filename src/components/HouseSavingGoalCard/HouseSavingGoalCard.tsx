@@ -4,31 +4,43 @@ import house from '../../assets/icons/house.svg';
 import TotalAmountInput from '../TotalAmountInput/TotalAmountInput';
 import ReachGoalInput from '../ReachGoalInput/ReachGoalInput';
 import SavingGoalResults from '../SavingGoalResults/SavingGoalResults';
-import { ReachGoalInputDate } from '../../utils/types/ReachGoalInputDate';
-
-const finalDate: ReachGoalInputDate = {
-  month: 9,
-  year: 2020
-};
+import { addYears, differenceInMonths } from 'date-fns';
 
 const HouseSavingGoalCard: FunctionComponent = () => {
-  const [result, setResult] = useState(521.0);
+  const [totalAmount, setTotalAmount] = useState(25000);
+  const [reachGoal, setReachGoal] = useState(addYears(new Date(), 4));
+
+  const handleAmountChange = (totalAmount: number) => {
+    setTotalAmount(totalAmount);
+  };
+
+  const handleReachGoalChange = (newReachGoal: Date) => {
+    setReachGoal(newReachGoal);
+  };
+
+  const numberOfMonthsToSave = differenceInMonths(reachGoal, new Date()) + 1;
+  const result = totalAmount / numberOfMonthsToSave;
+
   return (
     <Card>
       <img src={house} alt="A house icon" aria-hidden="true" />
       <h3>Buy a house</h3>
       <span className="label">Saving goal</span>
-      <TotalAmountInput />
-      <ReachGoalInput />
-      <SavingGoalResults
-        finalDate={finalDate}
-        numberOfMonthsToSave={48}
-        result={result}
-        totalAmount={25000}
+      <TotalAmountInput
+        initialValue={totalAmount}
+        onChange={handleAmountChange}
       />
-      <ConfirmButton onClick={() => setResult(result => result + 1)}>
-        Confirm
-      </ConfirmButton>
+      <ReachGoalInput
+        initialDate={reachGoal}
+        onChange={handleReachGoalChange}
+      />
+      <SavingGoalResults
+        finalDate={reachGoal}
+        numberOfMonthsToSave={numberOfMonthsToSave}
+        result={result}
+        totalAmount={totalAmount}
+      />
+      <ConfirmButton>Confirm</ConfirmButton>
     </Card>
   );
 };

@@ -10,6 +10,7 @@
     "allowSyntheticDefaultImports": true,
     "lib": ["dom", "esnext"],
     "typeRoots" : ["node_modules/@types", "src/assets/types"],
+    "moduleResolution": "Node",
     "module": "esnext",
     "esModuleInterop": true,
     "baseUrl": "./src"

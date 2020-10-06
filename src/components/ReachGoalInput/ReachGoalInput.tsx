@@ -1,78 +1,70 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { InputContainer } from './ReachGoalInput.styles';
 import { UseTransactionFrame } from '../../utils/types/useTransactionFrame';
-import { ReachGoalInputDate } from '../../utils/types/ReachGoalInputDate';
 import ReachGoalButton from './ReachGoalButton/ReachGoalButton';
 import DateTimeShow from './DateTimeShow/DateTimeShow';
-// Disabling rule because of react-spring lack of support for TypeScrypt
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
 import { useTransition } from 'react-spring';
 import {
   GenerateAnimationKey,
   OnNextTransitionAnimation,
   OnPreviousTransitionAnimation
 } from './ReachGoalInput.animations';
+import { addMonths } from 'date-fns';
 
-const ReachGoalInput: FunctionComponent = () => {
-  const now = new Date();
-  const [year, setYear] = useState(now.getFullYear() + 1);
-  const [month, setMonth] = useState(now.getMonth());
+export interface ReachGoalInputProps {
+  initialDate: Date;
+  onChange: (date: Date) => void;
+}
+
+const ReachGoalInput = (props: ReachGoalInputProps) => {
+  const { initialDate, onChange } = props;
+
+  const [time, setTime] = useState(initialDate);
+
   const [shouldShowNextAnimation, setShouldShowNextAnimation] = useState(true);
   const [disableSelectPreviousMonth, setDisableSelectPreviousMonth] = useState(
     false
   );
 
-  const currentValue: ReachGoalInputDate = {
-    year,
-    month
-  };
-
   useEffect(() => {
+    const now = new Date();
     const currentMonthIsSelected =
-      now.getFullYear() === year && now.getMonth() === month;
+      now.getFullYear() === time.getFullYear() &&
+      now.getMonth() === time.getMonth();
     if (currentMonthIsSelected) {
       setDisableSelectPreviousMonth(true);
       return;
     }
 
     setDisableSelectPreviousMonth(false);
-  }, [year, month, now]);
+  }, [time]);
 
   const handleSelectNextMonth = () => {
     setShouldShowNextAnimation(true);
-
-    const monthIsDecember = month === 11;
-    if (monthIsDecember) {
-      setYear(year => year + 1);
-      setMonth(0);
-      return;
-    }
-
-    setMonth(month => month + 1);
+    setTime((time: Date) => {
+      const result = addMonths(time, 1);
+      onChange(result);
+      return result;
+    });
   };
 
   const handleSelectPreviousMonth = () => {
-    setShouldShowNextAnimation(false);
-
-    const monthIsJanuary = month === 0;
-    if (monthIsJanuary) {
-      setYear(year => year - 1);
-      setMonth(11);
-      return;
-    }
-
-    setMonth(month => month - 1);
+    setShouldShowNextAnimation(true);
+    setTime((time: Date) => {
+      const result = addMonths(time, -1);
+      onChange(result);
+      return result;
+    });
   };
 
   const nextAnimation = useTransition(
-    currentValue,
+    time,
     GenerateAnimationKey,
     OnNextTransitionAnimation
   );
 
   const previousAnimation = useTransition(
-    currentValue,
+    time,
     GenerateAnimationKey,
     OnPreviousTransitionAnimation
   );

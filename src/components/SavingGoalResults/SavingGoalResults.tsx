@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import { ReachGoalInputDate } from '../../utils/types/ReachGoalInputDate';
 import { ResultsContainer } from './SavingGoalResults.styles';
 import { Months } from '../../utils/constants';
 import { CurrencyFormat } from '../../utils/functions';
@@ -12,13 +11,14 @@ export interface SavingGoalResultsProps {
   result: number;
   numberOfMonthsToSave: number;
   totalAmount: number;
-  finalDate: ReachGoalInputDate;
+  finalDate: Date;
 }
 
 const SavingGoalResults = (props: SavingGoalResultsProps) => {
   const { numberOfMonthsToSave, totalAmount, result, finalDate } = props;
-  const { year, month } = finalDate;
   const resultRef = useRef<HTMLMarqueeElement>(null);
+  const year = finalDate.getFullYear();
+  const month = finalDate.getMonth();
 
   useEffect(() => {
     const result = resultRef.current;
@@ -44,7 +44,7 @@ const SavingGoalResults = (props: SavingGoalResultsProps) => {
         </mark>
       </div>
       <details open>
-        <summary>Details</summary>
+        <summary />
         <p>
           You’re planning{' '}
           <strong>{numberOfMonthsToSave} monthly deposits</strong> to reach your{' '}
