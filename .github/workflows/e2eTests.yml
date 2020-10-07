@@ -26,9 +26,10 @@ jobs:
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
 
-      - name: Coveralls Action for Cypress tests
-        uses: coverallsapp/github-action@v1.1.2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: ./cypress/coverage/lcov.info
-          flag-name: E2e
+#       Cypress cover to coveralls
+#      - name: Coveralls Action for Cypress tests
+#        uses: coverallsapp/github-action@v1.1.2
+#        with:
+#          github-token: ${{ secrets.GITHUB_TOKEN }}
+#          path-to-lcov: ./cypress/coverage/lcov.info
+#          flag-name: E2e
