@@ -9,11 +9,12 @@ export const Container = styled.main`
   justify-content: center;
 
   font-size: 18px;
+  grid-area: 2 / 1 / 3 / 2;
 
   ${IsDesktopMediaQuery} {
     grid-area: 2 / 3 / 2 / 3;
     grid-column: 2;
-    font-size: 1.5vw;
+    font-size: 24px;
     grid-template-rows: 10vh auto;
   }
 

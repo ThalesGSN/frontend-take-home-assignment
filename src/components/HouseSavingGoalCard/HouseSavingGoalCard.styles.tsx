@@ -9,7 +9,7 @@ export const Card = styled.section`
   padding: 33px 16px;
 
   display: grid;
-  grid-template-rows: 20% 15% 15% 30% 20%;
+  grid-template-rows: 20% 15% 15% 150px minmax(5vh, auto);
   grid-template-columns: 100%;
   row-gap: 10px;
   grid-template-areas:
@@ -36,6 +36,8 @@ export const Card = styled.section`
 `;
 
 export const CardHeader = styled.section`
+  display: flex;
+  flex-direction: column;
   grid-area: Header;
   h3 {
     font-weight: 600;
@@ -49,7 +51,6 @@ export const CardHeader = styled.section`
   .label {
     color: var(--contrast-color);
     font-size: 14px;
-    margin-top: 5px;
   }
   ${IsDesktopMediaQuery} {
     img {
