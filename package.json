@@ -49,7 +49,7 @@
     "lint": "eslint './src/**/*.{ts,tsx}' --quiet",
     "start": "parcel ./src/index.html",
     "build": "parcel build ./src/index.html",
-    "cy:run": "cypress run && nyc report --reporter=text-summary",
+    "cy:run": "cypress run",
     "e2e": "./cypress/run.sh"
   },
   "nyc": {
