@@ -4,21 +4,25 @@ import house from '../../assets/icons/house.svg';
 import TotalAmountInput from '../TotalAmountInput/TotalAmountInput';
 import ReachGoalByInput from '../ReachGoalByInput/ReachGoalByInput';
 import SavingGoalResults from '../SavingGoalResults/SavingGoalResults';
-import { addYears, differenceInMonths } from 'date-fns';
+import { addYears, differenceInMonths, endOfDay, isThisMonth } from 'date-fns';
 
 const HouseSavingGoalCard: FunctionComponent = () => {
+  const today = new Date();
+  const fourYearsFromNow = addYears(endOfDay(today), 4);
   const [totalAmount, setTotalAmount] = useState(25000);
-  const [reachGoal, setReachGoal] = useState(addYears(new Date(), 4));
+  const [reachGoalBy, setReachGoalBy] = useState(fourYearsFromNow);
 
   const handleAmountChange = (newTotalAmount: number) => {
     setTotalAmount(newTotalAmount);
   };
 
   const handleReachGoalChange = (newReachGoal: Date) => {
-    setReachGoal(newReachGoal);
+    setReachGoalBy(newReachGoal);
   };
 
-  const numberOfMonthsToSave = differenceInMonths(reachGoal, new Date()) + 1;
+  const numberOfMonthsToSave = isThisMonth(reachGoalBy)
+    ? 1
+    : differenceInMonths(reachGoalBy, today);
   const result = totalAmount / numberOfMonthsToSave;
 
   return (
@@ -33,11 +37,11 @@ const HouseSavingGoalCard: FunctionComponent = () => {
         onChange={handleAmountChange}
       />
       <ReachGoalByInput
-        initialDate={reachGoal}
+        initialDate={reachGoalBy}
         onChange={handleReachGoalChange}
       />
       <SavingGoalResults
-        finalDate={reachGoal}
+        finalDate={reachGoalBy}
         numberOfMonthsToSave={numberOfMonthsToSave}
         result={result}
         totalAmount={totalAmount}

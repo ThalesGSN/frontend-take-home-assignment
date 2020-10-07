@@ -13,6 +13,7 @@ describe('House saving plan', () => {
   beforeEach(() => {
     cy.visit('/');
   });
+
   describe('Total amount input', () => {
     it('should be currency masked', () => {
       const maskedInput = cy.get(totalAmountInput);
@@ -66,7 +67,7 @@ describe('House saving plan', () => {
         .should('have.text', (now.getFullYear() + 5).toString());
     });
 
-    it('should select previous year if december passes', () => {
+    it('should select previous year if january passes', () => {
       for (let timesClicked = 0; timesClicked < 12; timesClicked++){
         cy.get(previousButton).click();
       }
@@ -81,9 +82,9 @@ describe('House saving plan', () => {
 
     it('should render default values', () => {
       cy.get(savingResult)
-        .should('have.text', '$510');
+        .should('have.text', '$521');
       cy.get(savingDetails)
-        .should('have.text', 'You’re planning 49 monthly deposits to reach your $25,000 goal by October 2024.');
+        .should('have.text', 'You’re planning 48 monthly deposits to reach your $25,000 goal by October 2024.');
     });
 
     it('should show results for $30,000 dollars and 50 months from now', () => {
