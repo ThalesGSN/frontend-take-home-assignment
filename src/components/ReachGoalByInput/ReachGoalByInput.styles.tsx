@@ -9,6 +9,10 @@ export const InputContainer = styled.div`
   font-weight: 500;
   span {
     margin-bottom: 8px;
+    &:focus {
+      border: 1px solid var(--primary-color);
+      outline: none;
+    }
   }
 
   article {

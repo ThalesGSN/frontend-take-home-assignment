@@ -2,7 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { InputContainer } from './ReachGoalByInput.styles';
 import ReachGoalButton from './ReachGoalButton/ReachGoalButton';
 import DateTimeShow from './DateTimeShow/DateTimeShow';
-import { ReachGoalByRefAnimation } from './ReachGoalByInput.animations';
+import {
+  ReachGoalByRefAnimationNext,
+  ReachGoalByRefAnimationPrevious
+} from './ReachGoalByInput.animations';
 import { addMonths } from 'date-fns';
 
 export interface ReachGoalInputProps {
@@ -14,6 +17,7 @@ const ReachGoalByInput = (props: ReachGoalInputProps) => {
   const { initialDate, onChange } = props;
 
   const [date, setDate] = useState(initialDate);
+  const [isNextPressed, setNextPressed] = useState(true);
   const [disabledSelectPreviousMonth, disableSelectPreviousMonth] = useState(
     false
   );
@@ -24,44 +28,72 @@ const ReachGoalByInput = (props: ReachGoalInputProps) => {
     const isCurrentMonthSelected =
       now.getFullYear() === date.getFullYear() &&
       now.getMonth() === date.getMonth();
-    ReachGoalByRefAnimation(dataTimeShowRef);
     disableSelectPreviousMonth(isCurrentMonthSelected);
-  }, [date]);
 
-  const handleSelectNextMonth = () => {
+    const animate = isNextPressed
+      ? ReachGoalByRefAnimationNext
+      : ReachGoalByRefAnimationPrevious;
+    animate(dataTimeShowRef);
+  }, [date, isNextPressed]);
+
+  const selectNextMonth = () => {
     setDate((oldDate: Date) => {
       const newDate = addMonths(oldDate, 1);
+      onChange(newDate);
+      setNextPressed(true);
+      return newDate;
+    });
+  };
+
+  const selectPreviousMonth = () => {
+    setDate((oldDate: Date) => {
+      const newDate = addMonths(oldDate, -1);
+      setNextPressed(false);
       onChange(newDate);
       return newDate;
     });
   };
 
-  const handleSelectPreviousMonth = () => {
-    setDate((oldDate: Date) => {
-      const newDate = addMonths(oldDate, -1);
-      onChange(newDate);
-      return newDate;
-    });
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    const keyPressed = event.key;
+    switch (keyPressed) {
+      case 'LeftArrow':
+        selectPreviousMonth();
+        break;
+      case 'RightArrow':
+        selectNextMonth();
+        break;
+    }
   };
 
   return (
     <InputContainer aria-required="true">
       <span>Reach goal by</span>
-      <span className="inputWrapper">
+
+      <span
+        tabIndex={0}
+        className="inputWrapper"
+        role="presentation"
+        onKeyDown={handleKeyDown}
+      >
         <ReachGoalButton
           className="previous"
-          onClick={handleSelectPreviousMonth}
+          onClick={selectPreviousMonth}
           disabled={disabledSelectPreviousMonth}
           aria-label="Select previous month"
         />
 
-        <article aria-label="Selected month" ref={dataTimeShowRef}>
+        <article
+          aria-label="Selected month"
+          aria-live="assertive"
+          ref={dataTimeShowRef}
+        >
           <DateTimeShow date={date} />
         </article>
 
         <ReachGoalButton
           className="next"
-          onClick={handleSelectNextMonth}
+          onClick={selectNextMonth}
           aria-label="Select next month"
           invertArrow={true}
         />
