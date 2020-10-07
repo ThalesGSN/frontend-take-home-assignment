@@ -38,6 +38,18 @@ For jest testing
 yarn test
 ```
 
+For cypress testing
+```
+#Add a .babelrc config file
+echo "{\"plugins\": [ \"istanbul\" ]}" > .babelrc
+
+# Start server and open cypress console
+yarn start && yarn cypress open
+
+# remove .babelrc config file
+rm .babelrc
+```
+
 ### Features
 
 #### Accessibility ♿
