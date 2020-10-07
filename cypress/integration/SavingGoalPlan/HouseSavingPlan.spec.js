@@ -31,8 +31,15 @@ describe('House saving plan', () => {
     it('should not accept non numeric digits', () => {
       const maskedInput = cy.get(totalAmountInput);
 
-      maskedInput.type('A @.,á');
+      maskedInput.type('A @,á');
       maskedInput.should('have.value', '25,000');
+    });
+
+    it('should accept two decimals', () => {
+      const maskedInput = cy.get(totalAmountInput);
+
+      maskedInput.type('.999');
+      maskedInput.should('have.value', '25,000.99');
     });
   });
 
