@@ -33,25 +33,9 @@ jobs:
           yarn run build
           yarn test
 
-      - name: Run cypress tests
-        run:  |
-            echo "{\"plugins\": [ \"istanbul\" ]}" > .babelrc
-            yarn cypress run && nyc report --reporter=text-summary
-            rm .babelrc .nyc_output
-
       - name: Coveralls Action for Jest tests
         uses: coverallsapp/github-action@v1.1.2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./jest/coverage
           flag-name: Unit
-          parallel: true
-
-      - name: Coveralls Action for Jest tests
-        uses: coverallsapp/github-action@v1.1.2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: ./cypress/coverage
-          flag-name: Integration
-          parallel-finished: true
-

@@ -1,0 +1,30 @@
+name: End-to-end tests
+on: [push]
+jobs:
+  cypress-run:
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: yarn install, build
+        run: |
+          yarn install
+          yarn run build
+
+      - name: Yarn & Node install cache
+        uses: EgorDm/gha-yarn-node-cache@v1
+
+      - name: Adds .babelrc file for code coverage tests
+        run: |
+              echo "{\"plugins\": [ \"istanbul\" ]}" > .babelrc
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+
+      - name: Coveralls Action for Cypress tests
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./cypress/coverage
+          flag-name: Integration
+          parallel-finished: true
