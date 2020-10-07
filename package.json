@@ -40,6 +40,7 @@
     "nyc": "^15.1.0",
     "parcel-bundler": "^1.12.4",
     "prettier": "^1.19.1",
+    "start-server-and-test": "^1.11.5",
     "ts-jest": "^25.2.1",
     "typescript": "^3.8.3"
   },
@@ -48,8 +49,8 @@
     "lint": "eslint './src/**/*.{ts,tsx}' --quiet",
     "start": "parcel ./src/index.html",
     "build": "parcel build ./src/index.html",
-    "cypress:open": "cypress open",
-    "e2e": "cypress run && nyc report --reporter=text-summary"
+    "cy:run": "cypress run && nyc report --reporter=text-summary",
+    "e2e": "./cypress/run.sh"
   },
   "nyc": {
     "report-dir": "cypress/coverage"

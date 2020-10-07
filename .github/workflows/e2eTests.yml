@@ -6,20 +6,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: yarn install, build
-        run: |
-          yarn install
-          yarn run build
 
       - name: Yarn & Node install cache
         uses: EgorDm/gha-yarn-node-cache@v1
 
-      - name: Adds .babelrc file for code coverage tests
+      - name: yarn install, build
         run: |
-              echo "{\"plugins\": [ \"istanbul\" ]}" > .babelrc
+          yarn install
+          yarn run build
+          yarn e2e
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
+#      - name: Adds .babelrc file for code coverage tests
+#        run: |
+#              echo "{\"plugins\": [ \"istanbul\" ]}" > .babelrc
+#
+#      - name: Cypress run
+#        uses: cypress-io/github-action@v2
 
       - name: Coveralls Action for Cypress tests
         uses: coverallsapp/github-action@v1.1.2
