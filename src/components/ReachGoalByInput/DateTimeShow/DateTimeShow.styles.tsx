@@ -5,6 +5,7 @@ export const DateTimeContainer = styled.section`
   justify-content: center;
   align-items: center;
   will-change: transform, opacity;
+  z-index: 0;
 
   time {
     display: flex;

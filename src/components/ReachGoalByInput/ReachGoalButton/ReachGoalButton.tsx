@@ -17,6 +17,7 @@ const ReachGoalButton = (props: ReachGoalButtonProps) => (
     disabled={props.disabled}
     aria-hidden={props.disabled ? 'true' : 'false'}
     aria-label={props['aria-label']}
+    tabIndex={-1}
   >
     <img
       src={Arrow}

@@ -21,10 +21,11 @@ export const InputContainer = styled.label`
     color: var(--main-color);
     font-weight: 600;
     font-size: 18px;
-    width: 80%;
+    flex: 3;
   }
 
   .iconArea {
+    flex: 1;
     background-color: var(--background-color);
     display: flex;
     align-content: center;
@@ -41,7 +42,8 @@ export const InputContainer = styled.label`
     }
   }
   .inputWrapper {
-    display: flex;
+    display: grid;
+    grid-template-columns: 56px auto;
     border: 1px solid #e1e8ed;
     border-radius: 4px;
   }

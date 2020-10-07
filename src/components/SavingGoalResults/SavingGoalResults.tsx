@@ -32,7 +32,7 @@ const SavingGoalResults = (props: SavingGoalResultsProps) => {
   useEffect(() => AnimateResultRef(finalDateRef), [finalDate]);
 
   return (
-    <ResultsContainer aria-label="Results">
+    <ResultsContainer aria-label="Results" aria-live="polite">
       <AmountContainer>
         <span aria-hidden="true">
           Monthly <AmountSpan>amount</AmountSpan>

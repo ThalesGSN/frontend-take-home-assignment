@@ -1,8 +1,13 @@
 import { GenerateRefAnimationTrigger } from '../../utils/functions';
 
-export const ReachGoalByInputAnimation: Keyframe[] = [
-  { opacity: 0.3 },
-  { opacity: 1 }
+export const ReachGoalByInputAnimationNext = [
+  { opacity: 0.3, transform: 'translateX(50%)' },
+  { opacity: 1, transform: 'translateX(0)' }
+];
+
+export const ReachGoalByInputAnimationPrevious = [
+  { opacity: 0.3, transform: 'translateX(-50%)' },
+  { opacity: 1, transform: 'translateX(0)' }
 ];
 
 export const ReachGoalByInputAnimationOptions: KeyframeAnimationOptions = {
@@ -11,7 +16,11 @@ export const ReachGoalByInputAnimationOptions: KeyframeAnimationOptions = {
   easing: 'ease-out'
 };
 
-export const ReachGoalByRefAnimation = GenerateRefAnimationTrigger(
-  ReachGoalByInputAnimation,
+export const ReachGoalByRefAnimationNext = GenerateRefAnimationTrigger(
+  ReachGoalByInputAnimationNext,
+  ReachGoalByInputAnimationOptions
+);
+export const ReachGoalByRefAnimationPrevious = GenerateRefAnimationTrigger(
+  ReachGoalByInputAnimationPrevious,
   ReachGoalByInputAnimationOptions
 );
