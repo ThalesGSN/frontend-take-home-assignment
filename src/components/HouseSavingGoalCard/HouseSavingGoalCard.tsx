@@ -10,8 +10,8 @@ const HouseSavingGoalCard: FunctionComponent = () => {
   const [totalAmount, setTotalAmount] = useState(25000);
   const [reachGoal, setReachGoal] = useState(addYears(new Date(), 4));
 
-  const handleAmountChange = (totalAmount: number) => {
-    setTotalAmount(totalAmount);
+  const handleAmountChange = (newTotalAmount: number) => {
+    setTotalAmount(newTotalAmount);
   };
 
   const handleReachGoalChange = (newReachGoal: Date) => {

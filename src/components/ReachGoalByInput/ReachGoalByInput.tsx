@@ -29,18 +29,18 @@ const ReachGoalByInput = (props: ReachGoalInputProps) => {
   }, [date]);
 
   const handleSelectNextMonth = () => {
-    setDate((time: Date) => {
-      const result = addMonths(time, 1);
-      onChange(result);
-      return result;
+    setDate((oldDate: Date) => {
+      const newDate = addMonths(oldDate, 1);
+      onChange(newDate);
+      return newDate;
     });
   };
 
   const handleSelectPreviousMonth = () => {
-    setDate((time: Date) => {
-      const result = addMonths(time, -1);
-      onChange(result);
-      return result;
+    setDate((oldDate: Date) => {
+      const newDate = addMonths(oldDate, -1);
+      onChange(newDate);
+      return newDate;
     });
   };
 
