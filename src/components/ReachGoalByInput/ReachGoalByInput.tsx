@@ -6,7 +6,7 @@ import {
   ReachGoalByRefAnimationNext,
   ReachGoalByRefAnimationPrevious
 } from './ReachGoalByInput.animations';
-import { addMonths } from 'date-fns';
+import { addMonths, isPast } from 'date-fns';
 
 export interface ReachGoalInputProps {
   initialDate: Date;
@@ -24,11 +24,7 @@ const ReachGoalByInput = (props: ReachGoalInputProps) => {
   const dataTimeShowRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const now = new Date();
-    const isCurrentMonthSelected =
-      now.getFullYear() === date.getFullYear() &&
-      now.getMonth() === date.getMonth();
-    disableSelectPreviousMonth(isCurrentMonthSelected);
+    disableSelectPreviousMonth(isPast(addMonths(date, -1)));
 
     const animate = isNextPressed
       ? ReachGoalByRefAnimationNext
@@ -46,6 +42,9 @@ const ReachGoalByInput = (props: ReachGoalInputProps) => {
   };
 
   const selectPreviousMonth = () => {
+    if (disabledSelectPreviousMonth) {
+      return;
+    }
     setDate((oldDate: Date) => {
       const newDate = addMonths(oldDate, -1);
       setNextPressed(false);
@@ -57,10 +56,10 @@ const ReachGoalByInput = (props: ReachGoalInputProps) => {
   const handleKeyDown = (event: React.KeyboardEvent) => {
     const keyPressed = event.key;
     switch (keyPressed) {
-      case 'LeftArrow':
+      case 'ArrowLeft':
         selectPreviousMonth();
         break;
-      case 'RightArrow':
+      case 'ArrowRight':
         selectNextMonth();
         break;
     }

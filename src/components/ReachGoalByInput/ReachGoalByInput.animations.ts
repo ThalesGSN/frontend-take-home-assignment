@@ -1,12 +1,12 @@
 import { GenerateRefAnimationTrigger } from '../../utils/functions';
 
 export const ReachGoalByInputAnimationNext = [
-  { opacity: 0.3, transform: 'translateX(50%)' },
+  { opacity: 0.5, transform: 'translateX(50px)' },
   { opacity: 1, transform: 'translateX(0)' }
 ];
 
 export const ReachGoalByInputAnimationPrevious = [
-  { opacity: 0.3, transform: 'translateX(-50%)' },
+  { opacity: 0.5, transform: 'translateX(-50px)' },
   { opacity: 1, transform: 'translateX(0)' }
 ];
 
