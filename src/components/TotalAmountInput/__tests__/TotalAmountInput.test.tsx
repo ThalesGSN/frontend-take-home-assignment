@@ -29,17 +29,4 @@ describe('TotalAmountInput', () => {
       'numeric'
     );
   });
-  //TODO: implement logic.
-
-  // it('should have a input that does not accept non numeric digits', () => {
-  //   const input = totalAmountInput.find('.masked-input');
-  //   input.simulate('change', { target: { value: 'a1234567890!!!' } });
-  //   expect(input.prop('value')).toBe('1234567890');
-  // });
-  //
-  // it('should have a input that masks user input to a monetary value', () => {
-  //   const input = totalAmountInput.find('.masked-input');
-  //   input.simulate('change', { target: { value: '25000' } });
-  //   expect(input.text()).toBe('25,000');
-  // });
 });

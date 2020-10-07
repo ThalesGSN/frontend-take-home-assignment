@@ -3,8 +3,8 @@ export const CurrencyMaskOptions = {
   suffix: '',
   includeThousandsSeparator: true,
   thousandsSeparatorSymbol: ',',
-  allowDecimal: false,
-  integerLimit: 10,
+  allowDecimal: true,
+  integerLimit: 8,
   allowNegative: false,
   allowLeadingZeroes: false
 };

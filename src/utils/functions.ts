@@ -19,7 +19,7 @@ export const GetNumberFromString = (numericString?: string) => {
     return null;
   }
 
-  return Number(numericString.replace(/\D/g, ''));
+  return Number(numericString.replace(/[,]|\D+\.|\.$/g, ''));
 };
 
 export const GenerateRefAnimationTrigger = (
