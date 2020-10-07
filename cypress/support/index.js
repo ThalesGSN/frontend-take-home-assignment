@@ -13,9 +13,11 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
+/* eslint-disable */
 Cypress.Screenshot.defaults({
   screenshotOnRunFailure: false
 });
 
 // Import commands.js using ES2015 syntax:
 import './commands';
+import '@cypress/code-coverage/support';
